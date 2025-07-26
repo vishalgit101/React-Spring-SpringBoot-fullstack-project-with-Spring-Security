@@ -5,7 +5,7 @@ import toast from "react-hot-toast";
 
 const ContextApi = createContext();
 
-const ContextProvider = ({ children }) => {
+export const ContextProvider = ({ children }) => {
   //find the token in the localstorage
   const getToken = localStorage.getItem("JWT_TOKEN")
     ? // carefull here with stringyfy
