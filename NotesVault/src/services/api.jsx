@@ -1,5 +1,5 @@
 import axios from "axios";
-import { json } from "react-router-dom";
+//import { json } from "react-router";
 console.log("Api Url: ", import.meta.env.VITE_APP_API_URL);
 
 //creating axios instance

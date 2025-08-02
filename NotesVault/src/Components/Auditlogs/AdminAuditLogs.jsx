@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import api from "../../services/api";
+import api from "../../services/api.jsx";
 import { Link } from "react-router-dom";
 import { DataGrid } from "@mui/x-data-grid";
 import { Blocks } from "react-loader-spinner";
 import toast from "react-hot-toast";
-import { auditLogsTruncateTexts } from "../../utils/truncateText.js";
-import Errors from "../Errors.js";
+import { auditLogsTruncateTexts } from "../../utils/truncateText.jsx";
+import Errors from "../Errors.jsx";
 import moment from "moment";
 import { MdDateRange } from "react-icons/md";
 

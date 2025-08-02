@@ -8,7 +8,10 @@ const ProtectedRoute = ({ children, adminPage }) => {
   // Access the token and isAdmin state by using the useMyContext hook from the ContextProvider
   const { token, isAdmin } = useMyContext();
 
+  console.log("Protected Route");
+  console.log("Protected Route token: " + token);
   //navigate to login page to an unauthenticated
+
   if (!token) {
     return <Navigate to="/login" />;
   }

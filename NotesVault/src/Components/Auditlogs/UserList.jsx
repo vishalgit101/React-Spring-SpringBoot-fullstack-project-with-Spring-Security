@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import api from "../../services/api.js";
+import api from "../../services/api.jsx";
 import { DataGrid } from "@mui/x-data-grid";
 import toast from "react-hot-toast";
 import { Blocks } from "react-loader-spinner";
-import Errors from "../Errors.js";
+import Errors from "../Errors.jsx";
 import moment from "moment";
 import { Link } from "react-router-dom";
 import { MdOutlineEmail } from "react-icons/md";

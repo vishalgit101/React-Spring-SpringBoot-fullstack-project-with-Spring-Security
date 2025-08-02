@@ -9,7 +9,7 @@ export const ContextProvider = ({ children }) => {
   //find the token in the localstorage
   const getToken = localStorage.getItem("JWT_TOKEN")
     ? // carefull here with stringyfy
-      JSON.parse(localStorage.getItem("JWT_TOKEN"))
+      JSON.stringify(localStorage.getItem("JWT_TOKEN"))
     : null;
 
   //find the user status from the localstorage
@@ -42,9 +42,14 @@ export const ContextProvider = ({ children }) => {
       try {
         const response = await api.get("/auth/user");
         const data = response.data;
-        const roles = data.roles;
 
-        if (roles.includes("ADMIN")) {
+        const rolesArr = response.data.Roles.map((role) => {
+          return "ROLE_" + role.role;
+        });
+
+        const roles = rolesArr;
+
+        if (roles.includes("ROLE_ADMIN")) {
           localStorage.setItem("IS_ADMIN", JSON.stringify(true));
           setIsAdmin(true);
         } else {
