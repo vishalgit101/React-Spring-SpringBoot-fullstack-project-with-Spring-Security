@@ -48,6 +48,8 @@ const UserProfile = () => {
 
   const userRole = function () {
     // needs to be set in the state
+    console.log(currentUser);
+    console.log("User Profile Roles: " + currentUser.roles);
     if (currentUser.roles.includes("ROLE_ADMIN")) {
       return "ROLE_ADMIN";
     } else {
@@ -73,7 +75,7 @@ const UserProfile = () => {
 
   //fetching the 2fa sttaus
 
-  useEffect(() => {
+  /*useEffect(() => {
     setPageLoader(true);
 
     const fetch2FAStatus = async () => {
@@ -145,7 +147,7 @@ const UserProfile = () => {
     } finally {
       settwofaCodeLoader(false);
     }
-  };
+  };*/
 
   //update the credentials
   const handleUpdateCredential = async (data) => {
@@ -175,6 +177,7 @@ const UserProfile = () => {
 
   //set the status of (credentialsNonExpired, accountNonLocked, enabled and credentialsNonExpired) current user
   useEffect(() => {
+    console.log("User Profile: " + currentUser);
     if (currentUser?.id) {
       setValue("username", currentUser.username);
       setValue("email", currentUser.email);
@@ -509,7 +512,9 @@ const UserProfile = () => {
                 </div>
               </div>
             </div>
-            <div className="flex-1 flex flex-col shadow-lg shadow-gray-300 gap-2 px-4 py-6">
+
+            {/*This is for 2FA*/}
+            {/*<div className="flex-1 flex flex-col shadow-lg shadow-gray-300 gap-2 px-4 py-6">
               <div className="space-y-1">
                 <h1 className="text-slate-800 flex items-center gap-1 text-2xl font-bold">
                   <span>Authentication (MFA)</span>
@@ -585,7 +590,7 @@ const UserProfile = () => {
                   </Accordion>
                 </div>
               )}
-            </div>
+            </div>*/}
           </div>
         </>
       )}

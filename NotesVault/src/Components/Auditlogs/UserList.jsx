@@ -118,6 +118,7 @@ const UserList = () => {
       try {
         const response = await api.get("/admin/getusers");
         const usersData = Array.isArray(response.data) ? response.data : [];
+        console.log("UserList: " + usersData);
         setUsers(usersData);
       } catch (err) {
         setError(err?.response?.data?.message);

@@ -25,7 +25,7 @@ api.interceptors.request.use(
 
     //getting csrf token
     let csrf = localStorage.getItem("CSRF_TOKEN");
-    if (!csrf) {
+    /*if (!csrf) {
       try {
         const response = await axios.get(
           `${import.meta.env.VITE_APP_API_URL}/api/csrf-token`,
@@ -36,6 +36,17 @@ api.interceptors.request.use(
       } catch (err) {
         console.error("Failed to fetch CSRF token", err);
       }
+    }*/
+
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_APP_API_URL}/api/csrf-token`,
+        { withCredentials: true }
+      );
+      csrf = response.data.token;
+      localStorage.setItem("CSRF_TOKEN", csrf);
+    } catch (err) {
+      console.error("Failed to fetch CSRF token", err);
     }
 
     if (csrf) {

@@ -37,10 +37,30 @@ const UserDetails = () => {
   const fetchUserDetails = useCallback(async () => {
     setLoading(true);
     try {
-      const response = await api.get(`/admin/user/${userId}`);
-      setUser(response.data);
+      const response = await api.get(`/admin/user/${userId}`); // await api.get(`/admin/user?userId=${userId}`);
+      console.log(response.data);
+      const data = response.data;
 
-      setSelectedRole(response.data.role?.roleName || "");
+      const rolesArr = response.data.roles.map((role) => {
+        return "ROLE_" + role.role;
+      });
+
+      const user = {
+        id: response.data.id,
+        userName: response.data.username,
+        email: data.email,
+        roles: rolesArr,
+        createdDate: data.createdDate,
+        updatedDate: data.updatedDate,
+        accountNonExpired: data.accountNonExpired,
+        accountNonLocked: data.accountNonLocked,
+        credentialsNonExpired: data.credentialsNonExpired,
+        twoFactorEnabled: data.twoFactorEnabled,
+      };
+
+      setUser(user);
+
+      setSelectedRole(rolesArr[0] || "");
     } catch (err) {
       setError(err?.response?.data?.message);
       console.error("Error fetching user details", err);
@@ -53,13 +73,15 @@ const UserDetails = () => {
     //if user exist set the value by using the setValue function provided my react-hook-form
     if (user && Object.keys(user).length > 0) {
       setValue("username", user.userName);
-      setValue("email", user.email);
+      setValue("email", user.userName);
     }
   }, [user, setValue]);
 
   const fetchRoles = useCallback(async () => {
     try {
       const response = await api.get("/admin/roles");
+      console.log(response.data, " Roles in dropbox");
+
       setRoles(response.data);
     } catch (err) {
       setError(err?.response?.data?.message);

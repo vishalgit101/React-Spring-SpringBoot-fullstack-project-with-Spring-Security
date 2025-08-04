@@ -1,1 +1,41 @@
 @import "tailwindcss";
+/* src/index.css */
+
+@theme {
+  /* Colors */
+  --color-headerColor: #242530;
+  --color-textColor: #ffffff;
+  --color-btnColor: #0172f4;
+  --color-noteColor: #ffcf7c;
+  --color-customRed: rgba(172, 30, 35, 1);
+  --color-testimonialCard: #f9f9f9;
+
+  /* Font Weights */
+  --font-weight-customWeight: 500;
+
+  /* Heights */
+  --height-headerHeight: 74px;
+  --max-navbarHeight: 420px;
+  --min-customHeight: 530px;
+
+  /* Font Families */
+  --font-family-montserrat: "Montserrat", sans-serif;
+  --font-family-dancingScript: "Dancing Script", cursive;
+
+  /*
+    Font Sizes: For original definitions like `headerText: ["50px", "60px"]`
+    (size and line-height), we'll typically map just the font size to the CSS variable.
+    You might need to manage line-height separately with Tailwind's `leading-*` utilities
+    or by defining another CSS variable specifically for line-height if needed.
+  */
+  --font-size-logoText: 30px;
+  --font-size-customText: 15px;
+  --font-size-tablehHeaderText: 16px;
+  --font-size-headerText: 50px;
+  --font-size-tableHeader: 15px;
+
+  /* Box Shadows */
+  --shadow-custom: 0 0 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Add any other global CSS styles below this */

@@ -40,12 +40,24 @@ export const ContextProvider = ({ children }) => {
 
     if (username) {
       try {
-        const response = await api.get("/auth/user");
-        const data = response.data;
+        const res = await api.get("/auth/user");
+        const data = res.data;
 
-        const rolesArr = response.data.Roles.map((role) => {
+        const rolesArr = res.data.Roles.map((role) => {
           return "ROLE_" + role.role;
         });
+
+        const user = {
+          id: res.data.id,
+          username: res.data.username,
+          roles: rolesArr,
+          createdDate: data.createdDate,
+          updatedDate: data.updatedDate,
+          accountNonExpired: data.accountNonExpired,
+          accountNonLocked: data.accountNonLocked,
+          credentialsNonExpired: data.credentialsNonExpired,
+          twoFactorEnabled: data.twoFactorEnabled,
+        };
 
         const roles = rolesArr;
 
@@ -56,7 +68,8 @@ export const ContextProvider = ({ children }) => {
           localStorage.removeItem("IS_ADMIN");
           setIsAdmin(false);
         }
-        setCurrentUser(data);
+        // this was causing the problem with profile page error
+        setCurrentUser(user);
       } catch (error) {
         console.error("Error fetching current user", error);
         toast.error("Error fetching current user");

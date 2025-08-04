@@ -53,6 +53,8 @@ const Login = () => {
     const res = await api.get("/auth/user"); // very important that this call comes after token is in the local storage
     console.log(res.data);
 
+    const data = res.data;
+
     const rolesArr = res.data.Roles.map((role) => {
       return "ROLE_" + role.role;
     });
@@ -60,7 +62,14 @@ const Login = () => {
     const user = {
       id: res.data.Id,
       username: res.data.Username,
+      email: data.Username,
       roles: rolesArr,
+      createdDate: data.createdDate,
+      updatedDate: data.updatedDate,
+      accountNonExpired: data.accountNonExpired,
+      accountNonLocked: data.accountNonLocked,
+      credentialsNonExpired: data.credentialsNonExpired,
+      twoFactorEnabled: data.twoFactorEnabled,
     };
 
     if (rolesArr.includes("ROLE_ADMIN")) {
@@ -76,7 +85,18 @@ const Login = () => {
     localStorage.setItem("USER", JSON.stringify(user));
 
     //store the token on the context state  so that it can be shared any where in our application by context provider
+    console.log(currentUser + " Inside Login");
+    console.log(isAdmin + " Inside Login");
 
+    //
+
+    // fetching from the local stoarge
+    // Now read back immediately from localStorage
+    const storedUser = JSON.parse(localStorage.getItem("USER"));
+    const storedIsAdmin = JSON.parse(localStorage.getItem("IS_ADMIN"));
+
+    console.log(storedUser, "from localStorage");
+    console.log(storedIsAdmin, "from localStorage");
     navigate("/notes");
   };
 
