@@ -50,6 +50,7 @@ const UserDetails = () => {
         userName: response.data.username,
         email: data.email,
         roles: rolesArr,
+        enabled: data.enabled,
         createdDate: data.createdDate,
         updatedDate: data.updatedDate,
         accountNonExpired: data.accountNonExpired,

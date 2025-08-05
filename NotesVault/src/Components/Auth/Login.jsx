@@ -64,6 +64,7 @@ const Login = () => {
       username: res.data.Username,
       email: data.Username,
       roles: rolesArr,
+      enabled: data.enabled,
       createdDate: data.createdDate,
       updatedDate: data.updatedDate,
       accountNonExpired: data.accountNonExpired,
