@@ -120,15 +120,18 @@ const Login = () => {
         setJwtToken(response.data.jwtToken);
 
         // i dont want to decode the token instaed i want to fect the user and the pass the data in the handleSuccessfullLogin function
-        // const decodedToken = jwtDecode(response.data.jwtToken);
-        /*if (decodedToken.is2faEnabled) {
+        const decodedToken = jwtDecode(response.data.jwtToken);
+        if (decodedToken.is2faEnabled) {
           setStep(2); // Move to 2FA verification step
         } else {
-          handleSuccessfulLogin(response.data.jwtToken, decodedToken);
-        }*/
+          handleSuccessfulLogin(response.data.jwtToken); // had to uncomment it for is2faEnabled
+        }
         //const res = await api.get("/auth/user");
 
-        handleSuccessfulLogin(response.data.jwtToken);
+        // now i want to decode the token to check is the user 2fa enabled, but other things like username and all entire user object will come from auth/user as i have modified it to come
+
+        //and had to comment it out now
+        // handleSuccessfulLogin(response.data.jwtToken);
       } else {
         toast.error(
           "Login failed. Please check your credentials and try again."
@@ -144,7 +147,7 @@ const Login = () => {
   };
 
   //function for verify 2fa authentication
-  /*const onVerify2FaHandler = async (data) => {
+  const onVerify2FaHandler = async (data) => {
     const code = data.code;
     setLoading(true);
 
@@ -159,15 +162,15 @@ const Login = () => {
         },
       });
 
-      const decodedToken = jwtDecode(jwtToken);
-      handleSuccessfulLogin(jwtToken, decodedToken);
+      //const decodedToken = jwtDecode(jwtToken); still dont need it, as for login success im fetchinh the user manually
+      handleSuccessfulLogin(jwtToken);
     } catch (error) {
       console.error("2FA verification error", error);
       toast.error("Invalid 2FA code. Please try again.");
     } finally {
       setLoading(false);
     }
-  };*/
+  };
 
   //if there is token  exist navigate  the user to the home page if he tried to access the login page
   useEffect(() => {

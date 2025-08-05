@@ -75,7 +75,7 @@ const UserProfile = () => {
 
   //fetching the 2fa sttaus
 
-  /*useEffect(() => {
+  useEffect(() => {
     setPageLoader(true);
 
     const fetch2FAStatus = async () => {
@@ -97,7 +97,10 @@ const UserProfile = () => {
     setDisbledLoader(true);
     try {
       const response = await api.post(`/auth/enable-2fa`);
-      setQrCodeUrl(response.data);
+      setQrCodeUrl(response.data.qrCodeUrl);
+      console.log(response.data.qrCodeUrl);
+      console.log(response.data, "User Profile 2fa");
+      console.log(response, "User Profile 2fa");
       setStep(2);
     } catch (error) {
       toast.error("Error enabling 2FA");
@@ -147,7 +150,7 @@ const UserProfile = () => {
     } finally {
       settwofaCodeLoader(false);
     }
-  };*/
+  };
 
   //update the credentials
   const handleUpdateCredential = async (data) => {
@@ -514,7 +517,7 @@ const UserProfile = () => {
             </div>
 
             {/*This is for 2FA*/}
-            {/*<div className="flex-1 flex flex-col shadow-lg shadow-gray-300 gap-2 px-4 py-6">
+            <div className="flex-1 flex flex-col shadow-lg shadow-gray-300 gap-2 px-4 py-6">
               <div className="space-y-1">
                 <h1 className="text-slate-800 flex items-center gap-1 text-2xl font-bold">
                   <span>Authentication (MFA)</span>
@@ -590,7 +593,7 @@ const UserProfile = () => {
                   </Accordion>
                 </div>
               )}
-            </div>*/}
+            </div>
           </div>
         </>
       )}
