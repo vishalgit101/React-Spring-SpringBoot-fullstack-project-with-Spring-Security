@@ -121,6 +121,8 @@ const Login = () => {
 
         // i dont want to decode the token instaed i want to fect the user and the pass the data in the handleSuccessfullLogin function
         const decodedToken = jwtDecode(response.data.jwtToken);
+        console.log("Decoded token");
+        console.log("Decoded token 2fa", decodedToken.is2faEnabled);
         if (decodedToken.is2faEnabled) {
           setStep(2); // Move to 2FA verification step
         } else {

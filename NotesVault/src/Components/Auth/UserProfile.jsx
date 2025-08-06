@@ -15,6 +15,7 @@ import { jwtDecode } from "jwt-decode";
 import { Blocks } from "react-loader-spinner";
 import moment from "moment";
 import Errors from "../Errors";
+import QRCode from "react-qr-code";
 
 const UserProfile = () => {
   // Access the currentUser and token hook using the useMyContext custom hook from the ContextProvider
@@ -571,7 +572,9 @@ const UserProfile = () => {
                     </AccordionSummary>
                     <AccordionDetails>
                       <div className="">
-                        <img src={qrCodeUrl} alt="QR Code" />
+                        {/*<img src={qrCodeUrl} alt="QR Code" />*/}
+
+                        {qrCodeUrl && <QRCode value={qrCodeUrl} size={200} />}
                         <div className="flex items-center  gap-2  mt-4">
                           <input
                             type="text"
