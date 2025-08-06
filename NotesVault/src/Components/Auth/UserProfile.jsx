@@ -16,6 +16,7 @@ import { Blocks } from "react-loader-spinner";
 import moment from "moment";
 import Errors from "../Errors";
 import QRCode from "react-qr-code";
+import ProfilePicture from "./ProfilePicture";
 
 const UserProfile = () => {
   // Access the currentUser and token hook using the useMyContext custom hook from the ContextProvider
@@ -343,7 +344,7 @@ const UserProfile = () => {
           {" "}
           <div className="xl:w-[70%] lg:w-[80%] sm:w-[90%] w-full sm:mx-auto sm:px-0 px-4   min-h-[500px] flex lg:flex-row flex-col gap-4 ">
             <div className="flex-1  flex flex-col shadow-lg shadow-gray-300 gap-2 px-4 py-6">
-              <div className="flex flex-col items-center gap-2   ">
+              {/*<div className="flex flex-col items-center gap-2   ">
                 <Avatar
                   alt={currentUser?.username}
                   src="/static/images/avatar/1.jpg"
@@ -351,7 +352,8 @@ const UserProfile = () => {
                 <h3 className="font-semibold text-2xl">
                   {currentUser?.username}
                 </h3>
-              </div>
+              </div>*/}
+              <ProfilePicture />
               <div className="my-4 ">
                 <div className="space-y-2 px-4 mb-1">
                   <h1 className="font-semibold text-md text-slate-800">

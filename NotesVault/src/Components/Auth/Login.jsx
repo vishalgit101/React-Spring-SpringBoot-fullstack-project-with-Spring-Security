@@ -71,6 +71,7 @@ const Login = () => {
       accountNonLocked: data.accountNonLocked,
       credentialsNonExpired: data.credentialsNonExpired,
       twoFactorEnabled: data.twoFactorEnabled,
+      profilePicture: data.profilePicture,
     };
 
     if (rolesArr.includes("ROLE_ADMIN")) {

@@ -57,6 +57,7 @@ const UserDetails = () => {
         accountNonLocked: data.accountNonLocked,
         credentialsNonExpired: data.credentialsNonExpired,
         twoFactorEnabled: data.twoFactorEnabled,
+        profilePicture: data.profilePicture,
       };
 
       setUser(user);
