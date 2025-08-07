@@ -24,41 +24,68 @@ api.interceptors.request.use(
     }
 
     //getting csrf token
-    let csrf = localStorage.getItem("CSRF_TOKEN");
-    /*if (!csrf) {
-      try {
-        const response = await axios.get(
-          `${import.meta.env.VITE_APP_API_URL}/api/csrf-token`,
-          { withCredentials: true }
-        );
-        csrf = response.data.token;
-        localStorage.setItem("CSRF_TOKEN", csrf);
-      } catch (err) {
-        console.error("Failed to fetch CSRF token", err);
-      }
-    }*/
+    let csrfToken = localStorage.getItem("CSRF_TOKEN");
 
-    try {
-      const response = await axios.get(
-        `${import.meta.env.VITE_APP_API_URL}/api/csrf-token`,
-        { withCredentials: true }
-      );
-      csrf = response.data.token;
-      localStorage.setItem("CSRF_TOKEN", csrf);
-    } catch (err) {
-      console.error("Failed to fetch CSRF token", err);
+    if (!csrfToken) {
+      csrfToken = await fetchCsrfToken();
     }
 
-    if (csrf) {
-      config.headers["X-XSRF-TOKEN"] = csrf; // // object key fetching with [ ]
+    if (csrfToken) {
+      config.headers["X-XSRF-TOKEN"] = csrfToken;
     }
-    console.log("csrf-token: ", csrf);
+
     return config;
   },
-  (error) => {
-    return Promise.reject(error);
+  (error) => Promise.reject(error)
+);
+
+// Function to fetch a new CSRF token and store it
+async function fetchCsrfToken() {
+  try {
+    const response = await axios.get(
+      `${import.meta.env.VITE_APP_API_URL}/api/csrf-token`,
+      { withCredentials: true }
+    );
+    const csrfToken = response.data.token;
+    localStorage.setItem("CSRF_TOKEN", csrfToken);
+    return csrfToken;
+  } catch (error) {
+    console.error("Failed to fetch CSRF token", error);
+    throw error;
+  }
+}
+
+// This whole csrf token section needs to be modified latter, as csrf token gets expired after each post request
+
+// Add a response interceptor to handle CSRF token expiration
+api.interceptors.response.use(
+  (response) => {
+    return response; // If response is successful, just return it
+  },
+  async (error) => {
+    const originalRequest = error.config;
+
+    // Check if error is due to CSRF token expiry (typically 403 or a specific error message)
+    if (
+      error.response &&
+      error.response.status === 403 &&
+      !originalRequest._retry
+    ) {
+      originalRequest._retry = true; // Prevent infinite retry loops
+
+      try {
+        const newCsrfToken = await fetchCsrfToken(); // Fetch a new CSRF token
+        originalRequest.headers["X-XSRF-TOKEN"] = newCsrfToken; // Update the header with new token
+
+        // Retry the original request with the new CSRF token
+        return api(originalRequest);
+      } catch (tokenRefreshError) {
+        return Promise.reject(tokenRefreshError); // If token refresh fails, reject the promise
+      }
+    }
+    console.error("Backend error response:", error.response?.data); // 👈 logs the message
+    return Promise.reject(error); // If error is not due to CSRF, reject it as usual
   }
 );
-// This whole csrf token section needs to be modified latter, as csrf token gets expired after each post request
 
 export default api;

@@ -12,7 +12,6 @@ import AllNotes from "./components/Notes/AllNotes";
 import NoteDetails from "./components/Notes/NoteDetails";
 import CreateNote from "./components/Notes/CreateNote";
 import Navbar from "./components/Navbar";
-//import ProtectedRoute from "./components/ProtectedRoute";
 import LandingPage from "./components/LandingPage";
 import AccessDenied from "./components/Auth/AccessDenied";
 import Admin from "./components/AuditLogs/Admin";
@@ -21,7 +20,7 @@ import ForgotPassword from "./components/Auth/ForgotPassword";
 import OAuth2RedirectHandler from "./components/Auth/OAuth2RedirectHandler";
 import { Toaster } from "react-hot-toast";
 import NotFound from "./components/NotFound";
-import ContactPage from "./components/contactPage/ContactPage";
+import ContactPage from "./components/ContactPage/ContactPage";
 import AboutPage from "./components/aboutPage/AboutPage";
 import ResetPassword from "./components/Auth/ResetPassword";
 import Footer from "./components/Footer/Footer";
@@ -32,7 +31,7 @@ const router = createBrowserRouter([
     path: "/",
     element: <Layout />, // layout wraps all child routes
     children: [
-      //{ path: "/", element: <LandingPage /> },
+      { path: "/", element: <LandingPage /> },
       { path: "login", element: <Login /> },
       { path: "signup", element: <Signup /> },
       { path: "forgot-password", element: <ForgotPassword /> },
