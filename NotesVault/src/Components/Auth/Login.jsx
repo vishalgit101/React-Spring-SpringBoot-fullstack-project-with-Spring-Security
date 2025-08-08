@@ -62,7 +62,7 @@ const Login = () => {
     const user = {
       id: res.data.Id,
       username: res.data.Username,
-      email: data.Username,
+      email: data.email,
       roles: rolesArr,
       enabled: data.enabled,
       createdDate: data.createdDate,
@@ -194,7 +194,7 @@ const Login = () => {
                 Login Here
               </h1>
               <p className="text-slate-600 text-center">
-                Please Enter your username and password{" "}
+                Please Enter your email and password{" "}
               </p>
               <div className="flex items-center justify-between gap-1 py-5 ">
                 <Link
@@ -226,7 +226,7 @@ const Login = () => {
 
             <div className="flex flex-col gap-2">
               <InputField
-                label="UserName"
+                label="Email"
                 required
                 id="username"
                 type="text"

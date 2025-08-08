@@ -25,7 +25,7 @@ export const auditLogscolumn = [
     align: "center",
     headerClassName: "text-black font-semibold border",
     cellClassName: "text-slate-700 font-normal  border",
-    renderHeader: (params) => <span className="ps-10">UserName</span>,
+    renderHeader: (params) => <span className="ps-10">User</span>,
   },
 
   {

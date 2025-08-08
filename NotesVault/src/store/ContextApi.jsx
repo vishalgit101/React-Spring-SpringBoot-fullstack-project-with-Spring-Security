@@ -51,7 +51,7 @@ export const ContextProvider = ({ children }) => {
           id: res.data.Id,
           username: res.data.Username,
           roles: rolesArr,
-          email: data.Username,
+          email: data.email,
           enabled: data.enabled,
           createdDate: data.createdDate,
           updatedDate: data.updatedDate,

@@ -75,7 +75,7 @@ const UserDetails = () => {
     //if user exist set the value by using the setValue function provided my react-hook-form
     if (user && Object.keys(user).length > 0) {
       setValue("username", user.userName);
-      setValue("email", user.userName);
+      setValue("email", user.email);
     }
   }, [user, setValue]);
 

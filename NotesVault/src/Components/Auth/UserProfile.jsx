@@ -403,7 +403,6 @@ const UserProfile = () => {
                           placeholder="Enter your username"
                           register={register}
                           errors={errors}
-                          readOnly
                         />{" "}
                         <InputField
                           label="Email"

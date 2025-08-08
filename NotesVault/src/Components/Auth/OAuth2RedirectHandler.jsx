@@ -56,7 +56,7 @@ const OAuth2RedirectHandler = () => {
           const user = {
             id: res.data.Id,
             username: res.data.Username,
-            email: data.Username,
+            email: data.email,
             roles: rolesArr,
             enabled: data.enabled,
             createdDate: data.createdDate,
