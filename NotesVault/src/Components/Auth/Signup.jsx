@@ -52,6 +52,7 @@ const Signup = () => {
       setLoading(true);
       const response = await api.post("/auth/public/signup", sendData);
       toast.success("Reagister Successful");
+      console.log(response.data);
       reset();
       if (response.data) {
         navigate("/login");
@@ -59,8 +60,13 @@ const Signup = () => {
     } catch (error) {
       // Add an error programmatically by using the setError function provided by react-hook-form
       //setError(keyword,message) => keyword means the name of the field where I want to show the error
-
-      if (
+      if (error.response && error.response.data) {
+        console.error("Error: ", error.response.data.message); // ✅
+        setError("username", { message: error.response.data.message }); // example for react-hook-form
+      } else {
+        console.error("Unexpected error:", error);
+      }
+      /* if (
         error?.response?.data?.message === "Error: Username is already taken!"
       ) {
         setError("username", { message: "username is already taken" });
@@ -68,7 +74,7 @@ const Signup = () => {
         error?.response?.data?.message === "Error: Email is already in use!"
       ) {
         setError("email", { message: "Email is already in use" });
-      }
+      }*/
     } finally {
       setLoading(false);
     }

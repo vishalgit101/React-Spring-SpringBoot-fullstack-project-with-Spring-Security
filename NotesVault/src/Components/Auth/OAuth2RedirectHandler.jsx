@@ -83,6 +83,7 @@ const OAuth2RedirectHandler = () => {
           //store the token on the context state  so that it can be shared any where in our application by context provider
           console.log(currentUser + " Inside Login");
           console.log(isAdmin + " Inside Login");
+          navigate("/");
         } catch (error) {
           console.error("User Fetching failed:", error);
           navigate("/login");

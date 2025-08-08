@@ -64,7 +64,7 @@ const UserProfile = () => {
     register,
     handleSubmit,
     setValue,
-
+    setError,
     formState: { errors },
   } = useForm({
     defaultValues: {
@@ -174,6 +174,12 @@ const UserProfile = () => {
       //fetchUser();
       toast.success("Update Credential successful");
     } catch (error) {
+      if (error.response && error.response.data) {
+        console.error("Error: ", error.response.data.message); // ✅
+        setError("username", { message: error.response.data.message }); // example for react-hook-form
+      } else {
+        console.error("Unexpected error:", error);
+      }
       toast.error("Update Credential failed");
     } finally {
       setLoading(false);
@@ -397,6 +403,7 @@ const UserProfile = () => {
                           placeholder="Enter your username"
                           register={register}
                           errors={errors}
+                          readOnly
                         />{" "}
                         <InputField
                           label="Email"
@@ -420,6 +427,7 @@ const UserProfile = () => {
                           register={register}
                           errors={errors}
                           min={6}
+                          required
                         />
                         <Buttons
                           disabled={loading}
@@ -598,6 +606,27 @@ const UserProfile = () => {
                   </Accordion>
                 </div>
               )}
+              <div className="mt-6 rounded-md bg-yellow-50 p-5 border-l-4 border-yellow-400 shadow-sm">
+                <h2 className="text-base font-semibold text-yellow-800 mb-3">
+                  Small Note
+                </h2>
+                <ul className="list-disc list-inside text-sm text-gray-700 space-y-2 pl-1">
+                  <li>
+                    For <span className="font-bold">OAuth2 </span> logins,{" "}
+                    <span className="font-bold">2FA</span> won't work.
+                  </li>
+                  <li>
+                    For checking audit logs, you need{" "}
+                    <span className="font-bold">admin permission</span>.
+                  </li>
+                  <li>
+                    To request admin access, please go to the contact page and
+                    send your <span className="font-bold">name</span>,{" "}
+                    <span className="font-bold">email</span> and{" "}
+                    <span className="font-bold">message</span>.
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
         </>

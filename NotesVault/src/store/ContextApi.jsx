@@ -48,9 +48,10 @@ export const ContextProvider = ({ children }) => {
         });
 
         const user = {
-          id: res.data.id,
-          username: res.data.username,
+          id: res.data.Id,
+          username: res.data.Username,
           roles: rolesArr,
+          email: data.Username,
           enabled: data.enabled,
           createdDate: data.createdDate,
           updatedDate: data.updatedDate,
@@ -58,6 +59,7 @@ export const ContextProvider = ({ children }) => {
           accountNonLocked: data.accountNonLocked,
           credentialsNonExpired: data.credentialsNonExpired,
           twoFactorEnabled: data.twoFactorEnabled,
+          profilePicture: data.profilePicture,
         };
 
         const roles = rolesArr;
